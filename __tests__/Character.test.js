@@ -1,8 +1,8 @@
 import Character from '../src/Character';
-import Bowman from '../src/Bowman'; // исправлено имя
+import Bowman from '../src/Bowman';
 import Swordsman from '../src/Swordsman';
 import Magician from '../src/Magician';
-import Daemon from '../src/Daemon'; // исправлено имя
+import Daemon from '../src/Daemon';
 import Undead from '../src/Undead';
 import Zombie from '../src/Zombie';
 
@@ -78,7 +78,8 @@ test('should inherit properties for all character types', () => {
 });
 
 test('Метод levelUp работает корректно', () => {
-  const char = new Character('Alice', 'Magician');
+  // Используем Magician: attack=10, defence=40
+  const char = new Magician('Gandalf');
   char.levelUp();
   expect(char.level).toBe(2);
   expect(char.attack).toBe(12); // 10 * 1.2
@@ -93,13 +94,15 @@ test('Метод levelUp выбрасывает ошибку при health=0', (
 });
 
 test('Метод damage корректно уменьшает здоровье', () => {
-  const char = new Character('Bob', 'Swordsman');
+  // Используем Swordsman: attack=40, defence=10
+  const char = new Swordsman('Aragorn');
   char.damage(20);
-  expect(char.health).toBeCloseTo(82); // 20 * (1 - 0.1)
+  // 100 - 20 * (1 - 10/100) = 100 - 18 = 82
+  expect(char.health).toBe(82);
 });
 
 test('Здоровье не уходит ниже 0', () => {
-  const char = new Character('Bob', 'Swordsman');
+  const char = new Swordsman('Aragorn');
   char.damage(200);
   expect(char.health).toBe(0);
 });
