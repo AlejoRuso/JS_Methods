@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack",
-    "test": "jest --coverage"
+    "start": "webpack serve --open",
+    "build": "webpack",
+    "test": "jest --coverage",
+    "lint": "eslint src/**/*.js __tests__/**/*.js"
   },
   "repository": {
     "type": "git",
@@ -34,7 +36,12 @@
     "transform": {
       "^.+\\.js$": "babel-jest"
     },
-    "moduleFileExtensions": ["js"],
-    "moduleDirectories": ["node_modules", "src"]
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
   }
 }

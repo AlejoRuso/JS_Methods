@@ -29,15 +29,47 @@ test('should throw error for invalid character type', () => {
 
 test('should inherit properties for all character types', () => {
   const types = [
-    { class: Bowman, type: 'Bowman', attack: 25, defence: 25 },
-    { class: Swordsman, type: 'Swordsman', attack: 40, defence: 10 },
-    { class: Magician, type: 'Magician', attack: 10, defence: 40 },
-    { class: Daemon, type: 'Daemon', attack: 10, defence: 40 },
-    { class: Undead, type: 'Undead', attack: 25, defence: 25 },
-    { class: Zombie, type: 'Zombie', attack: 40, defence: 10 },
+    {
+      class: Bowman,
+      type: 'Bowman',
+      attack: 25,
+      defence: 25,
+    },
+    {
+      class: Swordsman,
+      type: 'Swordsman',
+      attack: 40,
+      defence: 10,
+    },
+    {
+      class: Magician,
+      type: 'Magician',
+      attack: 10,
+      defence: 40,
+    },
+    {
+      class: Daemon,
+      type: 'Daemon',
+      attack: 10,
+      defence: 40,
+    },
+    {
+      class: Undead,
+      type: 'Undead',
+      attack: 25,
+      defence: 25,
+    },
+    {
+      class: Zombie,
+      type: 'Zombie',
+      attack: 40,
+      defence: 10,
+    },
   ];
 
-  types.forEach(({ class: Class, type, attack, defence }) => {
+  types.forEach(({
+    class: Class, type, attack, defence,
+  }) => {
     const char = new Class('Test');
     expect(char.type).toBe(type);
     expect(char.attack).toBe(attack);
