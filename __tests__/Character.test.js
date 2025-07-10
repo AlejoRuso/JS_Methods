@@ -71,3 +71,64 @@ test('Здоровье не уходит ниже 0', () => {
   char.damage(200);
   expect(char.health).toBe(0);
 });
+
+describe('Метод damage', () => {
+  test('Уменьшает здоровье при положительном значении', () => {
+    const char = new Swordsman('Warrior');
+    char.damage(50);
+    expect(char.health).toBeCloseTo(55); // 100 - 50*(1-0.1) = 100-45=55
+  });
+
+  test('Не уменьшает здоровье, если персонаж мертв', () => {
+    const char = new Swordsman('Warrior');
+    char.health = 0;
+    char.damage(50);
+    expect(char.health).toBe(0);
+  });
+
+  test('Устанавливает здоровье в 0 при отрицательном значении', () => {
+    const char = new Swordsman('Warrior');
+    char.damage(200);
+    expect(char.health).toBe(0);
+  });
+
+  test('Обрабатывает случай с defence=0', () => {
+    const char = new Swordsman('Warrior');
+    char.defence = 0;
+    char.damage(50);
+    expect(char.health).toBe(50);
+  });
+
+  test('Обрабатывает случай с defence=100', () => {
+    const char = new Swordsman('Warrior');
+    char.defence = 100;
+    char.damage(50);
+    expect(char.health).toBe(100);
+  });
+});
+
+describe('Метод levelUp', () => {
+  test('Повышает уровень и характеристики', () => {
+    const char = new Swordsman('Warrior');
+    char.levelUp();
+    expect(char.level).toBe(2);
+    expect(char.attack).toBe(48); // 40 * 1.2
+    expect(char.defence).toBe(12); // 10 * 1.2
+    expect(char.health).toBe(100);
+  });
+
+  test('Нельзя повысить уровень мертвого персонажа', () => {
+    const char = new Swordsman('Warrior');
+    char.health = 0;
+    expect(() => char.levelUp()).toThrow('Нельзя повысить уровень умершего');
+  });
+
+  test('Работает при пограничных значениях характеристик', () => {
+    const char = new Swordsman('Warrior');
+    char.attack = 0;
+    char.defence = 0;
+    char.levelUp();
+    expect(char.attack).toBe(0);
+    expect(char.defence).toBe(0);
+  });
+});
